@@ -3,10 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <title>Test Page</title>
+        <script src="./script.js" defer></script>
+        <link rel="stylesheet" href="./style.css">
     </head>
 
     <body>
-        <script src="./script.js"></script>
+        
+        <h1 class="header">Let's play Rock, Paper, Scissors!</h1>
+
+        <div class="container">
+            <div class="playerChoices">
+                <button id="rock" value="rock">Rock</button>
+                <button id="paper" value="paper">Paper</button>
+                <button id="scissors" value="scissors">Scissors</button>
+            </div>
+            
+            <div class="compChoice">
+
+                <div class="display"></div>
+
+            </div>
+
+        </div>
+
+        <div class="scoreboard"></div>
         
     </body>
 </html>

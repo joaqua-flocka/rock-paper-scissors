@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+.header {
+    flex: 0 0 5%;
+    background-color: rgb(2, 60, 107);
+    color: white;
+    margin: 0;
+    padding: 15px;
+}
+
+.container {
+    display: flex;
+    flex: 1 1;
+    padding: 2rem 15px;
+    gap: 15px;
+}
+
+.playerChoices {
+    flex: 0 1 400px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.compChoice {
+    flex: 1 2 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display {
+    width: 12rem;
+    height: 6rem;
+    display: flex;
+    background-color: rgb(76, 138, 253);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+.scoreboard {
+    flex: 1 1 20%;
+}

@@ -1,4 +1,5 @@
 
+
 //function to return the computer's choice of rock, paper, or scissors
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 4);
@@ -6,6 +7,7 @@ function getComputerChoice(){
         choice === 0 ? output = 'rock' :
         choice === 1 ? output = 'scissors' :
         output = 'paper';
+    display.textContent = 'Computer: ' + output.toUpperCase();
     return output;
 }
 //function to run a round of the game
@@ -41,47 +43,49 @@ function playRound(playerChoice, computerChoice){
             alert('error');
     }
 }
-//function to play the game
-function game(){
-//initialize each player's score at 0
-    let playerScore = 0;
-    let compScore = 0;
-
-//for 5 rounds, ask the player for an input
-    for(let i = 1; i <= 5; i++){
-        let input = prompt('Rock, paper, or scissors?','');
-        input = input.toLowerCase();
-
-//use playRound() to see if the player won, lost, or tied
-        let result = playRound(input, getComputerChoice());
-
-//increment the winner's score, log the winner of the round and the score to the console
-        switch(result){
-            case 'win':
-                console.log('You win Round ' + i + '!');
-                playerScore++;
-                console.log('The score is now ' + playerScore + ' - ' + compScore);
-                break;
-            case 'lose':
-                console.log('You lose Round ' + i + '!');
-                compScore++;
-                console.log('The score is now ' + playerScore + ' - ' + compScore);
-                break;
-            case 'tie':
-                console.log('Round ' + i + ' is a tie!');
-                console.log('The score is still ' + playerScore + ' - ' + compScore);
-                break;
-            default:
-                console.log('something has gone wrong')
-        }
+//function to increment score
+function incrementScore(result){
+    switch(result){
+        case 'win':
+            playerScore++;
+            scoreboard.textContent = 'You win this round! The score is now ' + playerScore + 
+                ' - ' + compScore;
+            break;
+        case 'lose':
+            compScore++;
+            scoreboard.textContent = 'You lose this round! The score is now ' + playerScore + 
+            ' - ' + compScore;
+            break;
+        case 'tie':
+            scoreboard.textContent = 'Tie! The score is still ' + playerScore + ' - ' + compScore;
+            break;
+        default:
+            console.log('something has gone wrong')
     }
-    if(playerScore > compScore)
-        console.log('Congrats, you win Rock, Paper, Scissors!');
-    else if(playerScore < compScore)
-        console.log('Game Over - You lost!');
-    else
-        console.log('It\'s a tie! Try again!');
-    
+    if(playerScore == 5){
+        scoreboard.textContent = 'you win! hooray!';
+    } else if(compScore == 5){
+        scoreboard.textContent = 'you lose! oh no!';
+    }
 }
 
-game();
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const scoreboard = document.querySelector('.scoreboard');
+const display = document.querySelector('.display');
+let playerScore = 0;
+let compScore = 0;
+
+
+rock.addEventListener('click', () => {
+    incrementScore(playRound(rock.value, getComputerChoice()));
+});
+paper.addEventListener('click', () => {
+    incrementScore(playRound(paper.value, getComputerChoice()));
+});
+scissors.addEventListener('click', () => {
+    incrementScore(playRound(scissors.value, getComputerChoice()));
+});
+
+
