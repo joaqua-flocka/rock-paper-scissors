@@ -7,11 +7,13 @@ function getComputerChoice(){
         choice === 0 ? output = 'rock' :
         choice === 1 ? output = 'scissors' :
         output = 'paper';
-    display.textContent = 'Computer: ' + output.toUpperCase();
+    let string = 'Computer: ' + output.toUpperCase();
+    appendText(display,string);
     return output;
 }
 //function to run a round of the game
 function playRound(playerChoice, computerChoice){
+    display.lastChild.textContent += "      Player: " + playerChoice.toUpperCase();
     switch(playerChoice){
         case 'rock':
             if(computerChoice === 'rock')
@@ -45,35 +47,61 @@ function playRound(playerChoice, computerChoice){
 }
 //function to increment score
 function incrementScore(result){
+    let string = '';
     switch(result){
         case 'win':
             playerScore++;
-            scoreboard.textContent = 'You win this round! The score is now ' + playerScore + 
+            string += 'You win this round! The score is now ' + playerScore + 
                 ' - ' + compScore;
+            appendText(display,string);
             break;
         case 'lose':
             compScore++;
-            scoreboard.textContent = 'You lose this round! The score is now ' + playerScore + 
+            string += 'You lose this round! The score is now ' + playerScore + 
             ' - ' + compScore;
+            appendText(display,string);
             break;
         case 'tie':
-            scoreboard.textContent = 'Tie! The score is still ' + playerScore + ' - ' + compScore;
+            string += 'Tie! The score is still ' + playerScore + ' - ' + compScore;
+            appendText(display,string);
             break;
         default:
-            console.log('something has gone wrong')
+            alert('something has gone wrong')
     }
-    if(playerScore == 5){
-        scoreboard.textContent = 'you win! hooray!';
-    } else if(compScore == 5){
-        scoreboard.textContent = 'you lose! oh no!';
+    if(playerScore == 5 && compScore < 5){
+        clearText(display);
+        appendText(display,'you win! hooray!');
+        display.firstChild.style.fontSize = 26;
+    } else if(compScore == 5 && playerScore < 5){
+        clearText(display);
+        appendText(display,'you lose! oh no!');
+        display.firstChild.style.fontSize = 26;
+
+    }
+}
+
+function appendText(div, string){
+    const para = document.createElement('p');
+    para.textContent = string;
+    if(div.childNodes.length > 10){
+        div.removeChild(div.firstChild);
+        div.style.paddingTop = '3rem';
+        console.log(div.style.height);
+    }
+    div.appendChild(para);
+}
+
+function clearText(div){
+    while(div.firstChild){
+        div.removeChild(div.firstChild);
     }
 }
 
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
-const scoreboard = document.querySelector('.scoreboard');
 const display = document.querySelector('.display');
+
 let playerScore = 0;
 let compScore = 0;
 
