@@ -68,14 +68,14 @@ function incrementScore(result){
         default:
             alert('something has gone wrong')
     }
-    if(playerScore == 5 && compScore < 5){
+    if(playerScore == 5 && compScore < 5 && playerScore > compScore){
         clearText(display);
         appendText(display,'you win! hooray!');
-        display.firstChild.style.fontSize = 26;
-    } else if(compScore == 5 && playerScore < 5){
+        display.firstChild.classList.add('gameover');
+    } else if(compScore == 5 && playerScore < 5 && compScore > playerScore){
         clearText(display);
         appendText(display,'you lose! oh no!');
-        display.firstChild.style.fontSize = 26;
+        display.firstChild.classList.add('gameover');
 
     }
 }
